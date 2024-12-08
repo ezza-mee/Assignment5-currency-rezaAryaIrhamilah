@@ -1,8 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
-import styles from './App.module.css';
 
 const API_KEY = '23e950e79b974312a5630ebc62763f71';
-
 const API_URL = `https://api.currencyfreaks.com/v2.0/rates/latest?apikey=${API_KEY}`;
 
 function App() {
@@ -58,41 +56,52 @@ function App() {
 	}, [formatApiData]);
 
 	return (
-		<main className={styles.main}>
-			<section className={styles.container}>
-				<div style={{ width: '100%' }}>
-					<h1 style={{ color: 'white', marginBottom: '10px' }}>{'Currency'}</h1>
-					{currencies.map((curr, index) => (
-						<div style={{ width: '100%' }} key={index}>
-							<p style={{ marginBottom: '5px', color: 'white' }}>{curr.currency}</p>
-						</div>
-					))}
+		<main className="bg-orange-500 min-h-screen flex items-center justify-center p-6">
+			<div className="flex flex-col justify-center items-center">
+				<section className="bg-orange-500 rounded-lg shadow-lg p-8 w-full max-w-6xl grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+					<div>
+						<h1 className="text-white text-xl font-semibold mb-4">Currency</h1>
+						{currencies.map((curr, index) => (
+							<p key={index} className="text-white text-sm mb-2">
+								{curr.currency}
+							</p>
+						))}
+					</div>
+					<div>
+						<h1 className="text-white text-xl font-semibold mb-4">We Buy</h1>
+						{currencies.map((curr, index) => (
+							<p key={index} className="text-white text-sm mb-2">
+								{curr.purchaseRate}
+							</p>
+						))}
+					</div>
+					<div>
+						<h1 className="text-white text-xl font-semibold mb-4">Exchange Rate</h1>
+						{currencies.map((curr, index) => (
+							<p key={index} className="text-white text-sm mb-2">
+								{curr.exchangeRate}
+							</p>
+						))}
+					</div>
+					<div>
+						<h1 className="text-white text-xl font-semibold mb-4">We Sell</h1>
+						{currencies.map((curr, index) => (
+							<p key={index} className="text-white text-sm mb-2">
+								{curr.sellRate}
+							</p>
+						))}
+					</div>
+				</section>
+				<div className="flex justify-center items-center w-full h-16">
+					<p className="text-white mt-4 text-xs">
+						Rates are fetched from 1 USD. This application uses API from{' '}
+						<a href="https://currencyfreaks.com" className="underline">
+							currencyfreaks.com
+						</a>
+						.
+					</p>
 				</div>
-				<div style={{ width: '100%' }}>
-					<h1 style={{ color: 'white', marginBottom: '10px' }}>{'We buy'}</h1>
-					{currencies.map((curr, index) => (
-						<div style={{ width: '100%' }} key={index}>
-							<p style={{ marginBottom: '5px', color: 'white' }}>{curr.purchaseRate}</p>
-						</div>
-					))}
-				</div>
-				<div style={{ width: '100%' }}>
-					<h1 style={{ color: 'white', marginBottom: '10px' }}>{'Exchange Rate'}</h1>
-					{currencies.map((curr, index) => (
-						<div style={{ width: '100%' }} key={index}>
-							<p style={{ marginBottom: '5px', color: 'white' }}>{curr.exchangeRate}</p>
-						</div>
-					))}
-				</div>
-				<div style={{ width: '100%' }}>
-					<h1 style={{ color: 'white', marginBottom: '10px' }}>{'We Sell'}</h1>
-					{currencies.map((curr, index) => (
-						<div style={{ width: '100%' }} key={index}>
-							<p style={{ marginBottom: '5px', color: 'white' }}>{curr.sellRate}</p>
-						</div>
-					))}
-				</div>
-			</section>
+			</div>
 		</main>
 	);
 }
